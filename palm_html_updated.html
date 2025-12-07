@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Monitoring Kelapa Sawit - TBS & OER Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS PALM.CSS">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="brand-icon">🌴</span>
+                <span class="brand-text">PalmFlow.id</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+                <li><a href="#input" class="nav-link">Data Input</a></li>
+                <li><a href="#livefeed" class="nav-link">Live Feed</a></li>
+                <li><a href="#kpi" class="nav-link">KPI Analysis</a></li>
+                <li><a href="#analitik" class="nav-link">Analitik</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <section id="home" class="page-section active">
+        <div class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Palm-Oil Mill Throughput Tracker</h1>
+                    <p class="hero-subtitle">
+                        Platform monitoring real-time untuk menganalisis siklus mingguan TBS dan 
+                        pengaruhnya terhadap Oil Extraction Rate (OER)
+                    </p>
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">📊</span>
+                            <span>Siklus Harian TBS</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📈</span>
+                            <span>Scatter Plot TBS vs OER</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🎯</span>
+                            <span>KPI Performance (Target 22%)</span>
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="navigateTo('dashboard')">
+                            <span>Lihat Dashboard</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                        <button class="btn btn-secondary" onclick="navigateTo('kpi')">
+                            <span>KPI Analysis</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD PAGE -->
+    <section id="dashboard" class="page-section">
+        <div class="dashboard-bg"></div>
+        <div class="container">
+            <div class="page-header">
+                <h2 class="page-title">Power BI Dashboard</h2>
+                <p class="page-subtitle">Visualisasi komprehensif TBS, OER, dan PKS</p>
+            </div>
+            <div class="dashboard-card">
+                <div class="iframe-wrapper">
+                    <iframe 
+                        title="PROJECT TIK" 
+                        width="100%" 
+                        height="100%" 
+                        src="https://app.powerbi.com/reportEmbed?reportId=a8062993-24f2-43ba-ac6c-07afd41c79ba&autoAuth=true&ctid=fedd5298-8e66-45f1-b321-fd38ad0ff722" 
+            
+                        frameborder="0" 
+                        allowFullScreen="true">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DATA INPUT PAGE -->
+    <section id="input" class="page-section">
+        <div class="container">
+            <div class="page-header">
+                <h2 class="page-title">Input Data TBS & OER</h2>
+                <p class="page-subtitle">Masukkan data harian TBS dan hasil OER (Target OER: 22%)</p>
+            </div>
+            <div class="input-card">
+                <form id="dataForm" class="data-form">
+                    <div class="form-group">
+                        <label for="hari">Hari</label>
+                        <select id="hari" required>
+                            <option value="">Pilih Hari</option>
+                            <option value="Senin">Senin</option>
+                            <option value="Selasa">Selasa</option>
+                            <option value="Rabu">Rabu</option>
+                            <option value="Kamis">Kamis</option>
+                            <option value="Jumat">Jumat</option>
+                            <option value="Sabtu">Sabtu</option>
+                            <option value="Minggu">Minggu</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="totalTBS">Total Volume TBS (Ton)</label>
+                            <input type="number" id="totalTBS" step="0.01" placeholder="Contoh: 450" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="oer">OER (%) - Target: 22%</label>
+                            <input type="number" id="oer" step="0.01" placeholder="Contoh: 22.5" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pks">PKS (Ton)</label>
+                            <input type="number" id="pks" step="0.01" placeholder="Contoh: 108" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="kondisi">Kondisi Load</label>
+                            <select id="kondisi" required>
+                                <option value="">Pilih Kondisi</option>
+                                <option value="Overload">Overload</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Underload">Underload</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <span>💾 Simpan Data</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="navigateTo('livefeed')">
+                            <span>📊 Lihat Live Feed</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE FEED PAGE -->
+    <section id="livefeed" class="page-section">
+        <div class="container">
+            <div class="page-header">
+                <h2 class="page-title">Siklus Mingguan TBS & Analisis OER</h2>
+                <p class="page-subtitle">Analisis pengaruh volume TBS terhadap persentase OER (Target: 22%)</p>
+            </div>
+            
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <div class="chart-card chart-card-large">
+                    <h3>📈 Siklus Harian Volume TBS (Senin - Minggu)</h3>
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>🔵 Scatter Plot: Volume TBS vs OER (%)</h3>
+                    <canvas id="scatterChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>📊 Distribusi Kondisi Load</h3>
+                    <canvas id="kondisiChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="table-card">
+                <div class="table-header">
+                    <h3>Data TBS & OER Tersimpan</h3>
+                    <button class="btn btn-danger" onclick="clearAllData()">🗑️ Hapus Semua</button>
+                </div>
+                <div class="table-wrapper">
+                    <table id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Hari</th>
+                                <th>TBS (Ton)</th>
+                                <th>OER (%)</th>
+                                <th>PKS (Ton)</th>
+                                <th>Kondisi Load</th>
+                                <th>Status vs Target</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr>
+                                <td colspan="8" class="empty-state">Belum ada data. Silakan input data terlebih dahulu.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KPI ANALYSIS PAGE -->
+    <section id="kpi" class="page-section">
+        <div class="container">
+            <div class="page-header">
+                <h2 class="page-title">KPI Performance Analysis</h2>
+                <p class="page-subtitle">Perbandingan OER terhadap Target 22% berdasarkan kondisi load</p>
+            </div>
+            
+            <div class="kpi-grid">
+                <div class="kpi-card kpi-overload">
+                    <div class="kpi-icon">🔴</div>
+                    <h3>Overload Condition</h3>
+                    <div class="kpi-value" id="kpiOverloadOER">0%</div>
+                    <div class="kpi-label">Rata-rata OER</div>
+                    <div class="kpi-target" id="kpiOverloadTarget">vs Target 22%: -</div>
+                    <div class="kpi-count" id="kpiOverloadCount">0 kejadian</div>
+                    <div class="kpi-trend" id="kpiOverloadTrend">Analisis trend</div>
+                </div>
+
+                <div class="kpi-card kpi-normal">
+                    <div class="kpi-icon">🟢</div>
+                    <h3>Normal Load Condition</h3>
+                    <div class="kpi-value" id="kpiNormalOER">0%</div>
+                    <div class="kpi-label">Rata-rata OER</div>
+                    <div class="kpi-target" id="kpiNormalTarget">vs Target 22%: -</div>
+                    <div class="kpi-count" id="kpiNormalCount">0 kejadian</div>
+                    <div class="kpi-trend" id="kpiNormalTrend">Analisis trend</div>
+                </div>
+
+                <div class="kpi-card kpi-underload">
+                    <div class="kpi-icon">🟡</div>
+                    <h3>Underload Condition</h3>
+                    <div class="kpi-value" id="kpiUnderloadOER">0%</div>
+                    <div class="kpi-label">Rata-rata OER</div>
+                    <div class="kpi-target" id="kpiUnderloadTarget">vs Target 22%: -</div>
+                    <div class="kpi-count" id="kpiUnderloadCount">0 kejadian</div>
+                    <div class="kpi-trend" id="kpiUnderloadTrend">Analisis trend</div>
+                </div>
+            </div>
+
+            <!-- Analysis Insights -->
+            <div class="analysis-content">
+                <div class="analysis-card highlight">
+                    <div class="card-header">
+                        <span class="card-number">💡</span>
+                        <h3>Insights & Rekomendasi (Target OER: 22%)</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="insight-item">
+                            <h4>🔴 Overload Condition</h4>
+                            <p>
+                                Pada kondisi overload, volume TBS yang berlebihan dapat menyebabkan penurunan OER 
+                                karena kapasitas pengolahan melampaui optimal. Meskipun throughput tinggi, efisiensi 
+                                ekstraksi cenderung menurun dan berisiko kerusakan mesin.
+                            </p>
+                        </div>
+                        <div class="insight-item">
+                            <h4>🟢 Normal Load Condition</h4>
+                            <p>
+                                Kondisi normal adalah sweet spot untuk mencapai target OER 22%. Volume TBS seimbang 
+                                dengan kapasitas pabrik menghasilkan ekstraksi optimal. Pertahankan kondisi ini untuk 
+                                sustainability dan efisiensi maksimal.
+                            </p>
+                        </div>
+                        <div class="insight-item">
+                            <h4>🟡 Underload Condition</h4>
+                            <p>
+                                Underload menunjukkan volume TBS di bawah kapasitas optimal. Meski OER bisa tinggi, 
+                                terjadi inefisiensi biaya operasional karena kapasitas tidak terpakai maksimal. 
+                                Optimalisasi supply chain diperlukan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANALITIK PAGE -->
+    <section id="analitik" class="page-section">
+        <div class="container">
+            <div class="page-header">
+                <h2 class="page-title">Analisis Mendalam TBS & OER</h2>
+                <p class="page-subtitle">Penelitian dan interpretasi data dengan target OER 22%</p>
+            </div>
+            
+            <div class="analysis-content">
+                <!-- Research Question -->
+                <div class="analysis-card">
+                    <div class="card-header">
+                        <span class="card-number">01</span>
+                        <h3>Research Question</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            Penelitian ini menganalisis hubungan invers antara volume TBS dengan persentase OER. 
+                            Pertanyaan utama: "Bagaimana siklus harian kedatangan TBS (Senin-Minggu) mempengaruhi 
+                            pencapaian target OER 22%, dan mengapa volume TBS yang lebih tinggi cenderung menghasilkan 
+                            OER yang lebih rendah?"
+                        </p>
+                        <p>
+                            Hipotesis: Semakin tinggi volume TBS yang diproses, semakin rendah persentase OER yang 
+                            dihasilkan karena keterbatasan kapasitas ekstraksi optimal pabrik. Target OER 22% dapat 
+                            dicapai dengan menjaga volume TBS dalam rentang optimal (normal load condition).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Daily Cycle Analysis -->
+                <div class="analysis-card">
+                    <div class="card-header">
+                        <span class="card-number">02</span>
+                        <h3>Analisis Siklus Harian TBS</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            Line chart menampilkan pola kedatangan TBS sepanjang minggu (Senin-Minggu). Data menunjukkan 
+                            bahwa hari dengan volume TBS tertinggi cenderung berada di tengah minggu (Rabu-Kamis) karena 
+                            akumulasi panen dari kebun-kebun pemasok.
+                        </p>
+                        <p>
+                            Pola ini penting untuk perencanaan kapasitas: hari dengan volume sangat tinggi (>550 ton) 
+                            berisiko overload dan penurunan OER di bawah target 22%. Sebaliknya, hari dengan volume 
+                            rendah (<350 ton) menunjukkan underload dengan potensi OER tinggi namun inefisiensi operasional.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Scatter Plot Analysis -->
+                <div class="analysis-card">
+                    <div class="card-header">
+                        <span class="card-number">03</span>
+                        <h3>Scatter Plot: Hubungan Invers TBS vs OER</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            Scatter plot mengungkapkan korelasi negatif antara volume TBS dan persentase OER. Ketika 
+                            volume TBS meningkat, OER cenderung menurun. Ini disebabkan oleh:
+                        </p>
+                        <ul>
+                            <li><strong>Keterbatasan kapasitas pressing:</strong> Volume berlebih menyebabkan proses ekstraksi tidak optimal</li>
+                            <li><strong>Waktu processing yang dipercepat:</strong> Throughput tinggi mengurangi waktu ekstraksi per batch</li>
+                            <li><strong>Kualitas buah heterogen:</strong> Volume besar sering mencampur buah dengan kematangan berbeda</li>
+                        </ul>
+                        <p>
+                            Sweet spot teridentifikasi pada volume 400-500 ton dengan OER mendekati atau melebihi 22%. 
+                            Di luar rentang ini, pencapaian target OER menjadi lebih sulit.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- KPI Analysis with Target -->
+                <div class="analysis-card">
+                    <div class="card-header">
+                        <span class="card-number">04</span>
+                        <h3>KPI Analysis: Perbandingan dengan Target 22%</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            Evaluasi KPI menggunakan benchmark target OER 22% sebagai standar industri optimal:
+                        </p>
+                        <ul>
+                            <li><strong>Overload:</strong> Rata-rata OER di bawah target (18-20%). Gap negatif menunjukkan 
+                            kehilangan efisiensi akibat kapasitas berlebih. Rekomendasi: Limit volume harian maksimal.</li>
+                            
+                            <li><strong>Normal Load:</strong> Rata-rata OER mendekati atau melebihi 22%. Kondisi ideal 
+                            untuk operasional berkelanjutan. Pertahankan volume pada rentang ini untuk konsistensi.</li>
+                            
+                            <li><strong>Underload:</strong> OER tinggi (23-25%) namun volume rendah. Meski melampaui target, 
+                            kondisi ini tidak ekonomis. Optimalisasi diperlukan untuk meningkatkan volume tanpa mengorbankan OER.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Final Interpretation -->
+                <div class="analysis-card highlight">
+                    <div class="card-header">
+                        <span class="card-number">05</span>
+                        <h3>Kesimpulan & Rekomendasi Strategis</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            Analisis komprehensif membuktikan hubungan invers antara volume TBS dan OER. Pencapaian 
+                            target OER 22% memerlukan capacity management yang ketat:
+                        </p>
+                        <p>
+                            <strong>Rekomendasi Implementasi:</strong>
+                        </p>
+                        <ol>
+                            <li><strong>Optimal Volume Range:</strong> Maintain volume TBS 400-500 ton/hari untuk 
+                            konsisten mencapai target OER 22%</li>
+                            
+                            <li><strong>Daily Capacity Planning:</strong> Gunakan data siklus mingguan untuk memprediksi 
+                            peak days dan redistribute volume secara proaktif</li>
+                            
+                            <li><strong>Quality Over Quantity:</strong> Pada hari high-volume, prioritaskan pemilahan 
+                            buah matang optimal untuk mempertahankan OER di atas 22%</li>
+                            
+                            <li><strong>Load Balancing:</strong> Implementasi sistem antrian TBS untuk mencegah overload 
+                            dan distribusikan ke hari underload</li>
+                            
+                            <li><strong>Real-time Monitoring:</strong> Gunakan dashboard untuk tracking OER vs volume 
+                            secara real-time dan quick adjustment</li>
+                        </ol>
+                        <p>
+                            <strong>Projected Impact:</strong> Dengan implementasi optimal load management, estimasi 
+                            peningkatan konsistensi OER di target 22% ±0.5%, mengurangi variance 60%, dan peningkatan 
+                            profitabilitas 12-15% dalam 6 bulan operasional.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Palm Oil Monitoring System - TBS & OER Analysis. All rights reserved.</p>
+            <p>Developed by PalmFlow.id Team</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="palm_js_final (1).js"></script>
+</body>
+</html>
